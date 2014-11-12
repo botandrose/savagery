@@ -1,5 +1,16 @@
 require "savagery/version"
 
 module Savagery
-  # Your code goes here...
+  def self.sprite! path
+    Spriter.new(path).sprite!
+  end
+
+  class Spriter
+    def initialize path
+    end
+
+    def sprite!
+    end
+  end
 end
+
