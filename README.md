@@ -12,23 +12,40 @@ gem "savagery"
 
 ## Usage
 
-Give savagery the name of a directory in app/assets/images to sprite:
+Given the following directory structure:
 
-```ruby
-# app/views/layouts/application.html.erb
-<%= svg_sprite_include "svgs" %>
+```
+app/assets/images/
+└── dogs
+    ├── chihuahua.svg
+    ├── golden.svg
+    └── lab.svg
 ```
 
-And then any images within that directory will be available later on in the view:
+Use the `svg_sprite_use` helper in your view:
 
 ```ruby
 # app/views/dogs/show.html.erb
-<%= svg_sprite_use "svgs/chihuahua" %>
+<%= svg_sprite_use "dogs/chihuahua" %>
 ```
+
+And Savagery will do all the hard work of spriting and embedding. A new .svg
+sprite file will appear in the images directory, named after the directory
+containing the sprites:
+
+```
+app/assets/images/
+├── dogs
+│   ├── chilhuahua.svg
+│   ├── golden.svg
+│   └── lab.svg
+└── dogs.svg
+```
+
+Make sure you check this file into version control.
 
 ## TODO
 
-* remove necessity of `svg_sprite_include`
 * add handlebars helpers for ember apps
 
 ## Contributing
