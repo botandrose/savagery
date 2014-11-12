@@ -1,24 +1,35 @@
 # Savagery
 
-TODO: Write a gem description
+Ruthlessly sprite SVGs in your Rails app.
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
-    gem 'savagery'
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install savagery
+```ruby
+gem "savagery"
+```
 
 ## Usage
 
-TODO: Write usage instructions here
+Give savagery the name of a directory in app/assets/images to sprite:
+
+```ruby
+# app/views/layouts/application.html.erb
+<%= svg_sprite_include "svgs" %>
+```
+
+And then any images within that directory will be available later on in the view:
+
+```ruby
+# app/views/dogs/show.html.erb
+<%= svg_sprite_use "svgs/chihuahua" %>
+```
+
+## TODO
+
+* remove necessity of `svg_sprite_include`
+* add handlebars helpers for ember apps
 
 ## Contributing
 
@@ -27,3 +38,4 @@ TODO: Write usage instructions here
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create a new Pull Request
+
