@@ -19,7 +19,7 @@ module Savagery
     end
 
     def sprite
-      "<svg><defs>\n\n#{symbols.join("\n")}\n</defs></svg>\n"
+      %(<svg style="display: none"><defs>\n\n#{symbols.join("\n")}\n</defs></svg>\n)
     end
 
     def symbols
