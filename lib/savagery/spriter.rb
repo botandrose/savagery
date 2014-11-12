@@ -10,6 +10,7 @@ module Savagery
 
     def sprite!
       File.write sprite_path, sprite
+      sprite_path
     end
 
     private
