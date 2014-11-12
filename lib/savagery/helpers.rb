@@ -6,8 +6,7 @@ module Savagery
       return raw("") if svg_sprites_included.include?(path)
       svg_sprites_included.add path
 
-      sprite_path = "app/assets/svgs/#{path}"
-      sprite_file = Savagery.sprite!(sprite_path)
+      sprite_file = "app/assets/svgs/#{path}.svg"
       raw File.read(sprite_file)
     end
 
