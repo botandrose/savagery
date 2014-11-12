@@ -4,9 +4,11 @@ module Savagery
   module Helpers
     def svg_sprite_include path
       return raw("") if svg_sprites_included.include?(path)
-      sprite_file_path = Savagery.sprite!("app/assets/images/#{path}")
       svg_sprites_included.add path
-      raw File.read(sprite_file_path)
+
+      sprite_path = "app/assets/svgs/#{path}"
+      sprite_file = Savagery.sprite!(sprite_path)
+      raw File.read(sprite_file)
     end
 
     def svg_sprite_use name, options={}

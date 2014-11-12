@@ -15,7 +15,7 @@ gem "savagery"
 Given the following directory structure:
 
 ```
-app/assets/images/
+app/assets/svgs/
 └── dogs
     ├── chihuahua.svg
     ├── golden.svg
@@ -30,11 +30,11 @@ Use the `svg_sprite_use` helper in your view:
 ```
 
 And Savagery will do all the hard work of spriting and embedding. A new .svg
-sprite file will appear in the images directory, named after the directory
+sprite file will appear in the `app/assets/svgs` directory, named after the directory
 containing the sprites:
 
 ```
-app/assets/images/
+app/assets/svgs/
 ├── dogs
 │   ├── chilhuahua.svg
 │   ├── golden.svg
