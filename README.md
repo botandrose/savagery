@@ -1,6 +1,6 @@
 # Savagery
 
-Ruthlessly sprite SVGs in your Rails app.
+Ruthlessly sprite SVGs in your Rails app. Includes Ember helpers, too!
 
 ## Installation
 
@@ -22,11 +22,19 @@ app/assets/svgs/
     └── lab.svg
 ```
 
-Use the `svg_sprite_use` helper in your view:
+Rails: Use the `svg_sprite_use` helper in your view:
 
 ```ruby
 # app/views/dogs/show.html.erb
 <%= svg_sprite_use "dogs/chihuahua" %>
+```
+
+Ember: Require `savagery/ember` anywhere, then use the 'svg-sprite-use` helper in your template:
+
+```javascript
+// app/assets/javascripts/templates/application.hbs
+//= require savagery/ember
+{{svg-sprite-use "dogs/chihuahua"}}
 ```
 
 And Savagery will do all the hard work of spriting and embedding. A new .svg
@@ -36,17 +44,13 @@ containing the sprites:
 ```
 app/assets/svgs/
 ├── dogs
-│   ├── chilhuahua.svg
+│   ├── chihuahua.svg
 │   ├── golden.svg
 │   └── lab.svg
 └── dogs.svg
 ```
 
 Make sure you check this file into version control.
-
-## TODO
-
-* add handlebars helpers for ember apps
 
 ## Contributing
 
