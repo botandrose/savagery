@@ -14,9 +14,9 @@ module Savagery
 
       basename = File.basename(name)
       options[:class] ||= basename
-      sprite + content_tag(:svg, options) do
-        content_tag :use, nil, "xlink:href" => "##{basename}"
-      end
+      use = raw(%(<svg class="#{options[:class]}"><use xlink:href="##{basename}"></use></svg>))
+
+      sprite + use
     end
 
     private
