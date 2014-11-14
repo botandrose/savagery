@@ -5,7 +5,7 @@ require "savagery/middleware"
 module Savagery
   class Engine < Rails::Engine
     initializer "savagery.helpers" do |app|
-      ApplicationController.helper(Helpers)
+      ApplicationController.helper Helpers::Rails
     end
 
     initializer "savagery.middleware" do |app|

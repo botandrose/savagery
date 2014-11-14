@@ -1,12 +1,12 @@
 require "savagery/helpers"
 require "action_view"
 
-describe Savagery::Helpers do
+describe Savagery::Helpers::Rails do
   subject { ActionView::Base.new.extend(described_class) }
 
   context "given a sprite" do
     before do
-      Savagery::Helpers::Helper.any_instance.stub svg_sprite_read: "<svg-defs/>\n"
+      Savagery::Helpers.any_instance.stub svg_sprite_read: "<svg-defs/>\n"
     end
 
     describe "#svg_sprite_use" do
