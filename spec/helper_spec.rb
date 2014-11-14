@@ -5,7 +5,9 @@ describe Savagery::Helpers do
   subject { ActionView::Base.new.extend(described_class) }
 
   context "given a sprite" do
-    before { subject.stub _svg_sprite_read: "<svg-defs/>\n" }
+    before do
+      Savagery::Helpers::Helper.any_instance.stub svg_sprite_read: "<svg-defs/>\n"
+    end
 
     describe "#svg_sprite_use" do
       it "outputs the sprite plus svg use element on first try" do
