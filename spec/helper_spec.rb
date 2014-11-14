@@ -1,4 +1,4 @@
-require "savagery/helpers"
+require "savagery/helpers/rails"
 require "action_view"
 
 describe Savagery::Helpers::Rails do

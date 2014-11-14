@@ -1,5 +1,5 @@
 require "rails"
-require "savagery/helpers"
+require "savagery/helpers/rails"
 require "savagery/middleware"
 
 module Savagery

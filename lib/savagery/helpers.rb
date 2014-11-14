@@ -1,7 +1,7 @@
 require "set"
 
 module Savagery
-  class Helpers
+  class Helpers < Struct.new(:base_path)
     def svg_sprite_include path
       svg_sprites_included.add path
       svg_sprite_read(path)
@@ -21,23 +21,11 @@ module Savagery
     end
 
     def svg_sprite_read path
-      File.read("app/assets/svgs/#{path}.svg")
+      File.read(svg_sprite_path(path))
     end
 
-    module Rails
-      def svg_sprite_include *args
-        raw _svg_sprite_helper.svg_sprite_include(*args)
-      end
-
-      def svg_sprite_use *args
-        raw _svg_sprite_helper.svg_sprite_use(*args)
-      end
-
-      private
-
-      def _svg_sprite_helper
-        @_svg_sprite_helper ||= Helpers.new
-      end
+    def svg_sprite_path path
+      File.join(base_path, "#{path}.svg")
     end
   end
 end
