@@ -3,20 +3,15 @@ require "set"
 module Savagery
   class Helpers
     def svg_sprite_include path
-      return "" if svg_sprites_included.include?(path)
       svg_sprites_included.add path
       svg_sprite_read(path)
     end
 
     def svg_sprite_use name, options={}
-      dirname = File.dirname(name)
-      sprite = svg_sprite_include(dirname)
-
-      basename = File.basename(name)
-      options[:class] ||= basename
-      use = %(<svg class="#{options[:class]}"><use xlink:href="##{basename}"></use></svg>)
-
-      sprite + use
+      dirname, basename = name.split("/")
+      sprite = svg_sprite_include(dirname) unless svg_sprites_included.include?(dirname)
+      use = %(<svg class="#{options[:class] || basename}"><use xlink:href="##{basename}"></use></svg>)
+      [sprite, use].join
     end
 
     private
@@ -30,12 +25,12 @@ module Savagery
     end
 
     module Rails
-      def svg_sprite_include path
-        raw _svg_sprite_helper.svg_sprite_include(path)
+      def svg_sprite_include *args
+        raw _svg_sprite_helper.svg_sprite_include(*args)
       end
 
-      def svg_sprite_use name, options={}
-        raw _svg_sprite_helper.svg_sprite_use(name, options)
+      def svg_sprite_use *args
+        raw _svg_sprite_helper.svg_sprite_use(*args)
       end
 
       private
