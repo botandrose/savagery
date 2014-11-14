@@ -3,11 +3,9 @@ require "set"
 module Savagery
   module Helpers
     def svg_sprite_include path
-      return raw("") if svg_sprites_included.include?(path)
-      svg_sprites_included.add path
-
-      sprite_file = "app/assets/svgs/#{path}.svg"
-      raw File.read(sprite_file)
+      return raw("") if _svg_sprites_included.include?(path)
+      _svg_sprites_included.add path
+      raw _svg_sprite_read(path)
     end
 
     def svg_sprite_use name, options={}
@@ -21,8 +19,14 @@ module Savagery
       end
     end
 
-    def svg_sprites_included
-      @svg_sprites_included ||= Set.new
+    private
+
+    def _svg_sprites_included
+      @_svg_sprites_included ||= Set.new
+    end
+
+    def _svg_sprite_read path
+      File.read("app/assets/svgs/#{path}.svg")
     end
   end
 end
