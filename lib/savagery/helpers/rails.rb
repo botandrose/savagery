@@ -14,7 +14,7 @@ module Savagery
     private
 
     def _svg_sprite_helper
-      @_svg_sprite_helper ||= Helpers.new("app/assets")
+      @_svg_sprite_helper ||= Helpers.new("app/assets/svgs")
     end
   end
 end
