@@ -1,6 +1,10 @@
 require "savagery/version"
 require "savagery/spriter"
-require "savagery/engine" if defined?(Rails)
+
+if defined?(Rails)
+  require "savagery/engine"
+  require "ember-rails-assets"
+end
 
 module Savagery
   def self.sprite! path
