@@ -1,9 +1,12 @@
+//= require ember-rails-assets
+
 Savagery = {
   svgSpriteInclude: function(name) {
     if(this._svgSpritesIncluded[name]) { return; }
     this._svgSpritesIncluded[name] = true
 
-    $.get("/assets/" + name + ".svg", function(data) {
+    path = window.ASSETS.path(name + ".svg")
+    $.get(path, function(data) {
       $("body").prepend(data);
     }, "text");
   },
