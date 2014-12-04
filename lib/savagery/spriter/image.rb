@@ -16,7 +16,7 @@ module Savagery
       end
 
       def image
-        data[/<svg\b[^>]*>(.+)<\/svg>/m, 1]
+        data[/<svg\b[^>]*>(.+)<\/svg>/m, 1].to_s.gsub(/^\s+/, "")
       end
 
       def data
