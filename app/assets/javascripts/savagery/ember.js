@@ -18,13 +18,14 @@ Savagery = {
 
   _svgSpritesIncluded: {},
 
-  emberHelper: function(name, options) {
+  emberHelper: function(params, hash) {
+    var name = params[0];
     var names = name.split("/");
     var dirname = names[0];
     var basename = names[1];
     Savagery.svgSpriteInclude(dirname);
 
-    var cssClass = options.hash["class"];
+    var cssClass = hash["class"];
     var html = Savagery.svgSpriteUse(basename, cssClass);
     return new Ember.Handlebars.SafeString(html);
   }
@@ -34,7 +35,7 @@ Ember.Application.initializer({
   name: "savagery-helpers",
 
   initialize: function(container, application) {
-    application.register("helper:svg-sprite-use", Savagery.emberHelper);
+    application.register("helper:svg-sprite-use", Ember.Helper.helper(Savagery.emberHelper));
   }
 });
 
