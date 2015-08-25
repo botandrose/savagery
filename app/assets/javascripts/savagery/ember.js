@@ -16,17 +16,25 @@ Savagery = {
     return '<svg class="' + cssClass + '"><use xlink:href="#' + basename + '"></use></svg>';
   },
 
-  _svgSpritesIncluded: {}
+  _svgSpritesIncluded: {},
+
+  emberHelper: function(name, options) {
+    var names = name.split("/");
+    var dirname = names[0];
+    var basename = names[1];
+    Savagery.svgSpriteInclude(dirname);
+
+    var cssClass = options.hash["class"];
+    var html = Savagery.svgSpriteUse(basename, cssClass);
+    return new Ember.Handlebars.SafeString(html);
+  }
 };
 
-Ember.Handlebars.helper("svg-sprite-use", function(name, options) {
-  var names = name.split("/");
-  var dirname = names[0];
-  var basename = names[1];
-  Savagery.svgSpriteInclude(dirname);
+Ember.Application.initializer({
+  name: "savagery-helpers",
 
-  var cssClass = options.hash["class"];
-  var html = Savagery.svgSpriteUse(basename, cssClass);
-  return new Ember.Handlebars.SafeString(html);
+  initialize: function(container, application) {
+    application.register("helper:svg-sprite-use", Savagery.emberHelper);
+  }
 });
 
