@@ -13,12 +13,23 @@ Savagery = {
 
   svgSpriteUse: function(basename, cssClass) {
     cssClass = cssClass || basename;
-    return '<svg class="' + cssClass + '"><use xlink:href="#' + basename + '"></use></svg>';
+    var absolutePath = window.location.href
+    absolutePath = absolutePath.replace(window.location.hash, '');
+    absolutePath = absolutePath + "#" + basename;
+    return '<svg class="' + cssClass + '"><use xlink:href="' + absolutePath + '"></use></svg>';
   },
 
   _svgSpritesIncluded: {},
+};
 
-  emberHelper: function(params, hash) {
+Ember.Application.initializer({
+  name: "savagery-helpers",
+
+  initialize: function(application) {
+    application.register("helper:svg-sprite-use", Ember.Helper.helper(this.svgSpriteUseHelper));
+  },
+
+  svgSpriteUseHelper: function(params, hash) {
     var name = params[0];
     var names = name.split("/");
     var dirname = names[0];
@@ -29,13 +40,17 @@ Savagery = {
     var html = Savagery.svgSpriteUse(basename, cssClass);
     return new Ember.Handlebars.SafeString(html);
   }
-};
+});
 
 Ember.Application.initializer({
-  name: "savagery-helpers",
+  name: "ember-rails-assets-helpers",
 
-  initialize: function(container, application) {
-    application.register("helper:svg-sprite-use", Ember.Helper.helper(Savagery.emberHelper));
+  initialize: function(application) {
+    application.register("helper:asset-path", Ember.Helper.helper(function(params, hash) {
+      var name = params[0];
+      var path = window.ASSETS.path(name);
+      return new Ember.Handlebars.SafeString(path);
+    }));
   }
 });
 

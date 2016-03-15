@@ -25,12 +25,17 @@ describe Savagery::Helpers::Rails do
     end
 
     describe "#svg_sprite_use" do
-      it "delegates to helpers" do
-        subject.svg_sprite_use.should == "<svg_sprite_use />"
+      let(:request) { double(path: "/omg/wtf") }
+
+      before { subject.stub(request: request) }
+
+      it "delegates to helpers with current_url set to request.path" do
+        helpers.should_receive(:svg_sprite_use).with("test", current_url: "/omg/wtf")
+        subject.svg_sprite_use("test").should == "<svg_sprite_use />"
       end
 
       it "is marked as safe to embed" do
-        subject.svg_sprite_use.should be_html_safe
+        subject.svg_sprite_use(double).should be_html_safe
       end
     end
   end
