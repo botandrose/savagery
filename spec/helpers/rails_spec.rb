@@ -25,12 +25,12 @@ describe Savagery::Helpers::Rails do
     end
 
     describe "#svg_sprite_use" do
-      let(:request) { double(fullpath: "/omg/wtf") }
+      let(:request) { double(original_url: "http://example.com/omg/wtf") }
 
       before { subject.stub(request: request) }
 
-      it "delegates to helpers with current_url set to request.fullpath" do
-        helpers.should_receive(:svg_sprite_use).with("test", current_url: "/omg/wtf")
+      it "delegates to helpers with current_url set to request.original_url" do
+        helpers.should_receive(:svg_sprite_use).with("test", current_url: "http://example.com/omg/wtf")
         subject.svg_sprite_use("test").should == "<svg_sprite_use />"
       end
 

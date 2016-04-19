@@ -8,7 +8,7 @@ module Savagery
     end
 
     def svg_sprite_use name, options={}
-      options[:current_url] = request.fullpath
+      options[:current_url] = request.original_url
       raw _svg_sprite_helper.svg_sprite_use(name, options)
     end
 
