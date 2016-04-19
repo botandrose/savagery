@@ -19,7 +19,7 @@ module Savagery
     end
 
     def sprite
-      %(<svg style="display: none"><defs>\n\n#{symbols.join("\n")}\n</defs></svg>\n)
+      %(<svg data-savagery-path="#{sprite_path.split("/assets/svgs/").last}" style="display: none"><defs>\n\n#{symbols.join("\n")}\n</defs></svg>\n)
     end
 
     def symbols

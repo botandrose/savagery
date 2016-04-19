@@ -2,10 +2,8 @@
 
 Savagery = {
   svgSpriteInclude: function(name) {
-    if(this._svgSpritesIncluded[name]) { return; }
-    this._svgSpritesIncluded[name] = true
-
-    path = window.ASSETS.path(name + ".svg")
+    var path = window.ASSETS.path(name + ".svg")
+    if($("[data-savagery-path='" + path.split("/assets/").reverse()[0] + "']").length > 0) { return; }
     $.get(path, function(data) {
       $("body").prepend(data);
     }, "text");
@@ -18,8 +16,6 @@ Savagery = {
     absolutePath = absolutePath + "#" + basename;
     return '<svg class="' + cssClass + '"><use xlink:href="' + absolutePath + '"></use></svg>';
   },
-
-  _svgSpritesIncluded: {},
 };
 
 Ember.Application.initializer({
