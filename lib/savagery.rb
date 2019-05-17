@@ -3,7 +3,6 @@ require "savagery/spriter"
 
 if defined?(Rails)
   require "savagery/engine"
-  require "ember-rails-assets"
 end
 
 module Savagery
