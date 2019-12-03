@@ -9,7 +9,9 @@ module Savagery
     end
 
     initializer "savagery.middleware" do |app|
-      app.config.middleware.use Middleware
+      if Rails.env.development?
+        app.config.middleware.use Middleware
+      end
     end
   end
 end
